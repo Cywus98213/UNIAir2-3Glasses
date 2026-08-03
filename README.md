@@ -1,4 +1,4 @@
-# UNIAir23Glasses
+# UNIAir2/3Glasses
 
 Comprehensive README for the UNIAir23Glasses Android application.
 
