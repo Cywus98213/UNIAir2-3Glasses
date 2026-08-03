@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Connection Status -->
+    <TextView
+        android:id="@+id/statusView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disconnected"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="#607D8B"
+        android:padding="12dp"
+        android:gravity="center"/>
+
+    <!-- Control Buttons -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/connectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connect"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/startAudioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Audio"
+            android:layout_marginEnd="8dp"/>
+    </LinearLayout>
+
+    <!-- Messages Section -->
+    <TextView
+        android:id="@+id/messageTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Messages from Phone"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#212121"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/messageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(No messages yet)"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:padding="12dp"
+        android:background="#E3F2FD"
+        android:layout_marginTop="8dp"
+        android:minHeight="80dp"/>
+
+    <!-- Debug Log Section -->
+    <TextView
+        android:id="@+id/debugTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Debug Log"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#212121"
+        android:layout_marginTop="16dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#F5F5F5"
+        android:padding="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/debugLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(Debug output will appear here)"
+            android:textSize="14sp"
+            android:textColor="#444444"/>
+    </ScrollView>
+</LinearLayout>
