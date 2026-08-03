@@ -80,10 +80,3 @@ See these files in the repo:
 
 **License**
 - No license file detected in this repository. Add a `LICENSE` file if you want to set explicit terms.
-
-**Contact / Maintainers**
-- For questions about the project, open an issue or contact the repository owner.
-
----
-
-This README was generated to provide a clear developer onboarding and build guide. If you'd like additional sections (architecture diagram, CI setup, or release process), tell me what to include.
