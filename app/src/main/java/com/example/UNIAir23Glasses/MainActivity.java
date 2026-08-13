@@ -9,7 +9,6 @@ import android.media.AudioFormat;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,11 +26,9 @@ import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "GlassesApp";
-    private static final String SERVER_IP = "172.27.150.78"; // phone hotspot IP
     private static final int SERVER_PORT = 8888;
 
-    private Button connectButton, startAudioButton, stopAudioButton;
+    private Button connectButton, startAudioButton;
     private TextView statusView, messageView, debugLog;
 
     private Socket socket;
@@ -57,23 +54,45 @@ public class MainActivity extends AppCompatActivity {
         startAudioButton.setOnClickListener(v -> startAudioCapture());
     }
 
-    public void getDeviceInfo(){
+    public void getDeviceInfo() {
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
-        int ip = dhcpInfo.ipAddress;
-        String ipString = String.format("%d.%d.%d.%d",
+        addDebugLog("Glasses WiFi IP: " + intToIp(dhcpInfo.ipAddress));
+        String phoneIp = intToIp(dhcpInfo.gateway);
+        if (dhcpInfo.gateway == 0) {
+            addDebugLog("Phone hotspot IP: not found — connect glasses to phone hotspot first");
+        } else {
+            addDebugLog("Phone hotspot IP (gateway): " + phoneIp);
+        }
+    }
+
+    private String getPhoneHotspotIp() {
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        int gateway = wifiManager.getDhcpInfo().gateway;
+        return gateway == 0 ? null : intToIp(gateway);
+    }
+
+    private static String intToIp(int ip) {
+        return String.format("%d.%d.%d.%d",
                 (ip & 0xff),
                 (ip >> 8 & 0xff),
                 (ip >> 16 & 0xff),
                 (ip >> 24 & 0xff));
-        addDebugLog("Glasses WiFi IP: " + ipString);
     }
+
     private void connectToServer() {
+        String serverIp = getPhoneHotspotIp();
+        if (serverIp == null) {
+            addDebugLog("Cannot connect: join the phone hotspot first, then tap Connect again");
+            setStatusView("Not on phone hotspot");
+            return;
+        }
+
         new Thread(() -> {
             try {
-                addDebugLog("Attempting connection to " + SERVER_IP + ":" + SERVER_PORT);
+                addDebugLog("Attempting connection to " + serverIp + ":" + SERVER_PORT);
                 socket = new Socket();
-                socket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT), 5000);
+                socket.connect(new InetSocketAddress(serverIp, SERVER_PORT), 5000);
                 addDebugLog("Connection established successfully");
                 out = socket.getOutputStream();
                 setStatusView("Connected to Phone Server");
