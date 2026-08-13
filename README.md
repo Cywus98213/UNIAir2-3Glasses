@@ -1,4 +1,4 @@
-# UNIAir23Glasses
+# UNIAir2/3Glasses
 
 Comprehensive README for the UNIAir23Glasses Android application.
 
@@ -80,8 +80,3 @@ See these files in the repo:
 
 **License**
 - No license file detected in this repository. Add a `LICENSE` file if you want to set explicit terms.
-
-**Contact / Maintainers**
-- For questions about the project, open an issue or contact the repository owner.
-
-
